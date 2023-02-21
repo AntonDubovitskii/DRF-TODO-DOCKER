@@ -8,7 +8,7 @@ const UserItem = ({user, deleteUser}) => {
             <td>{user.id}</td>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
-            <td>{user.project.id}</td>
+            <td>{user.project}</td>
             <td><button onClick={()=>deleteUser(user.id)} type='button'>Delete</button></td>
         </tr>
     )

@@ -10,7 +10,6 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class ServiceUserModelSerializer(ModelSerializer):
-    project = ProjectModelSerializer()
 
     class Meta:
         model = ServiceUser

@@ -39,7 +39,7 @@ class UserForm extends React.Component {
                 </div>
 
                 <div className="form-group">
-                <label for="project">User</label>
+                <label for="project">Project</label>
                 <select name="project" className='form-control' onChange={(event)=>
                     this.handleChange(event)}> {this.props.projects.map((project)=>
                     <option value={project.id}> {project.projectName}</option>)}

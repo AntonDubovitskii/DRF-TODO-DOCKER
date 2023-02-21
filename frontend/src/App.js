@@ -52,7 +52,7 @@ class App extends React.Component {
         this.setState({'token': token}, ()=>this.load_data())
     }
     get_token(username, password) {
-        axios.post('http://194.58.92.140:8000/api-token-auth/',
+        axios.post('http://127.0.0.1:8000/api-token-auth/',
             {username: username, password:password})
             .then(response => {this.set_token(response.data['token'])
             }).catch(error => alert('Неверный логин или пароль'))
@@ -69,10 +69,10 @@ class App extends React.Component {
         return headers
     }
 
-    createUser(first_name, last_name, email){
+    createUser(first_name, last_name, email, project){
         const headers = this.get_headers()
-        const data = {first_name: first_name, last_name: last_name, email: email}
-        axios.post(`http://194.58.92.140:8000/api/users/`, data, {headers})
+        const data = {first_name: first_name, last_name: last_name, email: email, project: project}
+        axios.post(`http://127.0.0.1:8000/api/users/`, data, {headers})
             .then(response=> {
                 let new_user = response.data
                 this.setState({users: [...this.state.users, new_user]})
@@ -80,7 +80,7 @@ class App extends React.Component {
     }
     deleteUser(id) {
         const headers = this.get_headers()
-        axios.delete(`http://194.58.92.140:8000/api/users/${id}/`, {headers})
+        axios.delete(`http://127.0.0.1:8000/api/users/${id}/`, {headers})
             .then(response => {
                 this.setState({users: this.state.users.filter((user)=>user.id !==id)})
             }).catch(error=>console.log(error))
@@ -88,7 +88,7 @@ class App extends React.Component {
 
     deleteProject(id){
         const headers = this.get_headers()
-        axios.delete(`http://194.58.92.140:8000/api/projects/${id}/`, {headers})
+        axios.delete(`http://127.0.0.1:8000/api/projects/${id}/`, {headers})
             .then(response => {
                 this.setState({projects: this.state.projects.filter((project)=>project.id !==id)})
             }).catch(error=>console.log(error))
@@ -97,7 +97,7 @@ class App extends React.Component {
     createProject(project_name, repo_link) {
         const headers = this.get_headers()
         const data = {project_name: project_name, repo_link: repo_link}
-        axios.post(`http://194.58.92.140:8000/api/projects/`, data, {headers})
+        axios.post(`http://127.0.0.1:8000/api/projects/`, data, {headers})
             .then(response => {
                 let new_project = response.data
                 this.setState({projects: [...this.state.projects, new_project]})
@@ -105,7 +105,7 @@ class App extends React.Component {
     }
     deleteTask(id){
         const headers = this.get_headers()
-        axios.delete(`http://194.58.92.140:8000/api/todo/${id}/`, {headers})
+        axios.delete(`http://127.0.0.1:8000/api/todo/${id}/`, {headers})
             .then(response => {
                 this.setState({tasks: this.state.tasks})
                 window.location.reload(false)
@@ -116,7 +116,7 @@ class App extends React.Component {
         const headers = this.get_headers()
         const data = {title: title, description: description, creator: creator, project: project}
         console.log(data)
-        axios.post(`http://194.58.92.140:8000/api/todo/`, data, {headers})
+        axios.post(`http://127.0.0.1:8000/api/todo/`, data, {headers})
             .then(response => {
                 let new_task = response.data
                 this.setState({tasks: [...this.state.tasks, new_task]})
@@ -125,7 +125,7 @@ class App extends React.Component {
     load_data() {
         const headers = this.get_headers()
         console.log(headers)
-        axios.get('http://194.58.92.140:8000/api/projects/', {headers})
+        axios.get('http://127.0.0.1:8000/api/projects/', {headers})
             .then(response => {
             const projects = response.data
                 this.setState(
@@ -138,7 +138,7 @@ class App extends React.Component {
             this.setState({projects: []})
         })
 
-        axios.get('http://194.58.92.140:8000/api/todo/', {headers})
+        axios.get('http://127.0.0.1:8000/api/todo/', {headers})
             .then(response => {
             const tasks = response.data
                 this.setState(
@@ -151,7 +151,7 @@ class App extends React.Component {
             this.setState({tasks: []})
         })
 
-        axios.get('http://194.58.92.140:8000/api/users/', {headers})
+        axios.get('http://127.0.0.1:8000/api/users/', {headers})
             .then(response => {
             const users = response.data
                 this.setState(
